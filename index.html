@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Absensi Digital - Face Recognition</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Main Container -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="main-header">
+                <div class="header-content">
+                    <div class="page-title">
+                        <h1 class="title">Absen Masuk, 1/21/2026</h1>
+                    </div>
+                    <div class="header-actions">
+                        <div class="datetime-section">
+                            <div class="time" id="current-time">00:00:00</div>
+                            <div class="date" id="current-date">Senin, 1 Januari 2024</div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Workspace Area -->
+            <div class="workspace">
+                <div class="workspace-container">
+                    <!-- Left Section - Camera -->
+                    <div class="camera-section">
+                        <div class="camera-card" id="camera-card">
+                            <div class="camera-header">
+                                <h3 class="camera-title">Umpan Kamera</h3>
+                                <button class="fullscreen-btn" id="fullscreen-btn">
+                                    <i class="fas fa-expand"></i>
+                                </button>
+                            </div>
+                            <div class="camera-container">
+                                <video id="camera-video" autoplay playsinline></video>
+                                <canvas id="camera-canvas" style="display: none;"></canvas>
+                                
+                                <!-- Scanning Effect -->
+                                <div class="scanning-overlay" id="scanning-overlay">
+                                    <div class="scan-line"></div>
+                                    <div class="scan-corners">
+                                        <div class="corner top-left"></div>
+                                        <div class="corner top-right"></div>
+                                        <div class="corner bottom-left"></div>
+                                        <div class="corner bottom-right"></div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Loading Indicator -->
+                                <div class="loading-indicator" id="loading-indicator" style="display: none;">
+                                    <div class="spinner"></div>
+                                    <div class="loading-text">Memindai wajah...</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Section - Data Table -->
+                    <div class="table-section">
+                        <div class="table-card">
+                            <div class="table-header">
+                                <h3 class="table-title">Data Absen Hari Ini</h3>
+                                <div class="table-actions">
+                                    <button class="btn-refresh">
+                                        <i class="fas fa-sync-alt"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="table-container">
+                                <table class="attendance-table">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Nama</th>
+                                            <th>Waktu</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Ahmad Rizki</td>
+                                            <td>08:15:23</td>
+                                            <td><span class="status-badge success">Hadir</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>Siti Nurhaliza</td>
+                                            <td>08:22:45</td>
+                                            <td><span class="status-badge success">Hadir</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>3</td>
+                                            <td>Budi Santoso</td>
+                                            <td>08:45:12</td>
+                                            <td><span class="status-badge warning">Terlambat</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="action-section">
+                    <button class="btn btn-primary" id="start-scan">
+                        <i class="fas fa-play"></i>
+                        Mulai Scan Wajah
+                    </button>
+                    <button class="btn btn-danger" id="close-camera">
+                        <i class="fas fa-times"></i>
+                        Tutup Kamera
+                    </button>
+                </div>
+
+                <!-- Result Section -->
+                <div class="result-section" id="result-section">
+                    <div class="result-card">
+                        <div class="user-info">
+                            <div class="user-avatar" id="user-avatar">
+                                <img id="captured-face" src="" alt="User Face">
+                            </div>
+                            <div class="user-details">
+                                <div class="user-name" id="user-name">-</div>
+                                <div class="user-status" id="user-status">-</div>
+                                <div class="check-time" id="check-time">-</div>
+                            </div>
+                        </div>
+                        <div class="status-badge" id="status-badge">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Berhasil Absen</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+    <!-- Notification Toast -->
+    <div class="toast" id="toast">
+        <div class="toast-content">
+            <div class="toast-icon" id="toast-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <div class="toast-message" id="toast-message">Absensi berhasil!</div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
